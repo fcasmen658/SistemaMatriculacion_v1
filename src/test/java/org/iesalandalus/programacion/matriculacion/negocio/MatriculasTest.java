@@ -1,6 +1,6 @@
 package org.iesalandalus.programacion.matriculacion.negocio;
 
-/*
+
 import org.iesalandalus.programacion.matriculacion.MainApp;
 import org.iesalandalus.programacion.matriculacion.dominio.*;
 import org.junit.jupiter.api.BeforeAll;
@@ -11,7 +11,7 @@ import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
-*/
+
 
 public class MatriculasTest {
 /*
@@ -460,7 +460,5 @@ public class MatriculasTest {
             fail(TIPO_EXCEPCION_NO_CORRECTO);
         }
     }
-
-
 */
 }
