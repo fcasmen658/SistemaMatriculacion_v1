@@ -154,15 +154,12 @@ public class Asignatura {
 
     @Override
     public String toString() {
-        return "Código=" + codigo +
-                ", nombre=" + nombre +
-                ", horas anuales=" + horasAnuales +
-                ", curso=" + curso +
-                ", horas desdoble=" + horasDesdoble +
-                ", ciclo formativo=" + cicloFormativo +
-                ", especialidad profesorado=" + especialidadProfesorado
-                ;
+        return
+                "Código=" + codigo +", nombre=" + nombre + ", horas anuales=" + horasAnuales +", curso=" + curso +
+                        ", horas desdoble=" + horasDesdoble + ", ciclo formativo=Código ciclo formativo=" +cicloFormativo.getCodigo()+ ", nombre ciclo formativo="+ cicloFormativo.getNombre()+
+                        ", especialidad profesorado=" + especialidadProfesorado;
     }
+
 
 
 }
