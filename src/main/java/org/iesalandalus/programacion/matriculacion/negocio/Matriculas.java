@@ -24,7 +24,7 @@ public class Matriculas {
     }
 
     //todo preguntar
-    public Matricula[] get() {
+    public Matricula[] get() throws OperationNotSupportedException {
         if (tamano == 0) {
             return new Matricula[0];
         }

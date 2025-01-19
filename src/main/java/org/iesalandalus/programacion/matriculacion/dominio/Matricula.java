@@ -1,5 +1,6 @@
 package org.iesalandalus.programacion.matriculacion.dominio;
 
+import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Objects;
@@ -21,7 +22,7 @@ public class Matricula {
     private LocalDate fechaAnulacion;
 
     //Constructor con parámetros
-    public Matricula(int idMatricula, String cursoAcademico, LocalDate fechaMatriculacion, Alumno alumno, Asignatura[] coleccionAsignaturas) {
+    public Matricula(int idMatricula, String cursoAcademico, LocalDate fechaMatriculacion, Alumno alumno, Asignatura[] coleccionAsignaturas) throws OperationNotSupportedException {
         setIdMatricula(idMatricula);
         setCursoAcademico(cursoAcademico);
         setFechaMatriculacion(fechaMatriculacion);

@@ -33,9 +33,14 @@ public class Alumnos {
 
     public void insertar(Alumno alumno) throws OperationNotSupportedException {
         if (alumno == null) {
-            throw new NullPointerException("ERROR: El alumno no puede ser nulo.");
+            throw new NullPointerException("ERROR: No se puede insertar un alumno nulo.");
         }
         if (tamanoSuperado(getTamano())) {
+            throw new OperationNotSupportedException("ERROR: No existe ningún alumno como el indicado.");
+        }
+
+        int indice = buscarIndice(alumno);
+        if (capacidadSuperada(indice)) {
             throw new OperationNotSupportedException("ERROR: No se aceptan más alumnos.");
         }
 
@@ -100,6 +105,9 @@ public class Alumnos {
     public void borrar(Alumno alumno) throws OperationNotSupportedException {
         if (alumno == null) {
             throw new NullPointerException("ERROR: El alumno no puede ser nulo.");
+        }
+        if (tamanoSuperado(getTamano())) {
+            throw new OperationNotSupportedException("ERROR: No existe ningún alumno como el indicado.");
         }
         if (buscarIndice(alumno) == -1) {
             throw new OperationNotSupportedException("ERROR: El alumno no se encuentra en la colección de alumnos.");
