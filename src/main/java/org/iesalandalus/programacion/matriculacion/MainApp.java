@@ -17,6 +17,8 @@ import java.util.Arrays;
 
 public class MainApp {
 
+
+    // prueba
     public static final int CAPACIDAD = 3;
     private static Matriculas matriculas = new Matriculas(CAPACIDAD);
     private static Asignaturas asignaturas = new Asignaturas(CAPACIDAD);
