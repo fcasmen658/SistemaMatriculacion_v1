@@ -1,14 +1,14 @@
 package org.iesalandalus.programacion.matriculacion;
 
 
-import org.iesalandalus.programacion.matriculacion.dominio.Alumno;
-import org.iesalandalus.programacion.matriculacion.dominio.Asignatura;
-import org.iesalandalus.programacion.matriculacion.dominio.CicloFormativo;
-import org.iesalandalus.programacion.matriculacion.dominio.Matricula;
-import org.iesalandalus.programacion.matriculacion.negocio.Alumnos;
-import org.iesalandalus.programacion.matriculacion.negocio.Asignaturas;
-import org.iesalandalus.programacion.matriculacion.negocio.CiclosFormativos;
-import org.iesalandalus.programacion.matriculacion.negocio.Matriculas;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.Alumnos;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.Asignaturas;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.CiclosFormativos;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.Matriculas;
 import org.iesalandalus.programacion.matriculacion.vista.Consola;
 import org.iesalandalus.programacion.matriculacion.vista.Opcion;
 
@@ -17,7 +17,7 @@ import java.util.Arrays;
 
 public class MainApp {
 
-
+/*
     // prueba
     public static final int CAPACIDAD = 3;
     private static Matriculas matriculas = new Matriculas(CAPACIDAD);
@@ -99,57 +99,11 @@ public class MainApp {
                 mostrarMatriculasPorCursoAcademico();
                 break;
         }
+
+
     }
 
-    private static void insertarAlumno() {
-        try {
-            Alumno nuevoAlumno = Consola.leerAlumno();
-            if (alumnos.buscar(nuevoAlumno) != null) {
-                try {
-                    alumnos.insertar(nuevoAlumno);
-                    System.out.println("Alumno insertado.");
-                    throw new OperationNotSupportedException("ERROR: Ya existe un alumno con ese DNI.");
-                } catch (OperationNotSupportedException e) {
-                    System.out.println(e.getMessage());
-                }
-                System.out.println("Ya existe un alumno con ese DNI.");
-            }
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private static void buscarAlumno() {
-        try {
-            Alumno alumno = Consola.getAlumnoPorDni();
-            Alumno encontrado = alumnos.buscar(alumno);
-            System.out.println((encontrado != null) ? encontrado : "No se encontró el alumno");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private static void borrarAlumno() {
-        try {
-            Alumno alumno = Consola.getAlumnoPorDni();
-            alumnos.borrar(alumno);
-            System.out.println("Alumno eliminado correctamente.");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private static void mostrarAlumnos() {
-        Alumno[] coleccion = alumnos.get();
-        if (coleccion.length == 0) {
-            System.out.println("No hay alumnos registrados.");
-        } else {
-            for (Alumno alumno : coleccion) {
-                if (alumno != null) System.out.println(alumno);
-            }
-        }
-    }
 
     private static void insertarCicloFormativo() {
         try {
@@ -323,5 +277,5 @@ public class MainApp {
         }
     }
 
-
+*/
 }

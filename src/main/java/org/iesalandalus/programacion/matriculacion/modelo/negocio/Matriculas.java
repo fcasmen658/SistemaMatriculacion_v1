@@ -1,9 +1,9 @@
-package org.iesalandalus.programacion.matriculacion.negocio;
+package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 
-import org.iesalandalus.programacion.matriculacion.dominio.Alumno;
-import org.iesalandalus.programacion.matriculacion.dominio.Asignatura;
-import org.iesalandalus.programacion.matriculacion.dominio.CicloFormativo;
-import org.iesalandalus.programacion.matriculacion.dominio.Matricula;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
 
 import javax.naming.OperationNotSupportedException;
 import java.util.Objects;
@@ -150,16 +150,16 @@ public class Matriculas {
         }
         return copiaMatriculas;
     }
-    /* //todo
+
     public Matricula[] get (CicloFormativo cicloFormativo) {
         Matricula[] copiaMatriculas = new Matricula[capacidad];
         for (int i = 0; !tamanoSuperado(i); i++) {
-            if (cicloFormativo.equals(coleccionMatriculas[i].get())) {
+            if (cicloFormativo.equals(coleccionMatriculas[i].getIdMatricula())) {
                 copiaMatriculas[i] = new Matricula(coleccionMatriculas[i]);
             }
         }
         return copiaMatriculas;
-    }*/
+    }
 
 }
 
