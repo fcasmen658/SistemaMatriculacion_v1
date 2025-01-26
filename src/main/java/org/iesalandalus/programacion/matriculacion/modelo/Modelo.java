@@ -8,27 +8,28 @@ import org.iesalandalus.programacion.matriculacion.modelo.negocio.Alumnos;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.Asignaturas;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.CiclosFormativos;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.Matriculas;
-import org.iesalandalus.programacion.matriculacion.vista.Consola;
+//import org.iesalandalus.programacion.matriculacion.vista.Consola;
 
 import javax.naming.OperationNotSupportedException;
 
 public class Modelo {
 
-    public int CAPACIDAD;
+    public static int CAPACIDAD = 10;
     private Alumnos alumnos;
     private Matriculas matriculas;
     private Asignaturas asignaturas;
     private CiclosFormativos ciclosFormativos;
 
     public void comenzar() {
-        Alumnos Alumnos = new Alumnos(CAPACIDAD);
-        Matriculas Matriculas = new Matriculas(CAPACIDAD);
-        Asignaturas Asignaturas = new Asignaturas(CAPACIDAD);
-        CiclosFormativos CiclosFormativos = new CiclosFormativos(CAPACIDAD);
+        this.alumnos = new Alumnos(CAPACIDAD);
+        this.matriculas = new Matriculas(CAPACIDAD);
+        this.asignaturas = new Asignaturas(CAPACIDAD);
+        this.ciclosFormativos = new CiclosFormativos(CAPACIDAD);
     }
 
     public void terminar() {
         System.out.println("El programa ha finalizado.");
+        System.exit(0);
     }
 
     public void insertar(Alumno alumno) throws OperationNotSupportedException {

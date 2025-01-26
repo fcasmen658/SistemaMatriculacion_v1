@@ -9,8 +9,8 @@ import java.util.regex.Pattern;
 public class Alumno {
 
     private static final String ER_TELEFONO = "\\d{9}";
-    private final String ER_CORREO = "[0-9a-zA-Z-._+&]+@+[0-9a-zA-Z-._+&]+[.]+[a-zA-Z]{2,6}$";
-    private static final String ER_DNI = "[0-9]{8}[A-Z]";
+    private static String ER_CORREO = "[0-9a-zA-Z-._+&]+@+[0-9a-zA-Z-._+&]+[.]+[a-zA-Z]{2,6}$";
+    private static final String ER_DNI = "[0-9]{8}[A-Za-z]";
     public static final String FORMATO_FECHA = "dd/MM/yyyy";
     private static final String ER_NIA = "^[a-z]{4}\\d{3}$";
     private static final int MIN_EDAD_ALUMNADO = 16;
@@ -37,12 +37,13 @@ public class Alumno {
         if (alumno == null) {
             throw new NullPointerException("ERROR: No es posible copiar un alumno nulo.");
         }
-        this.nombre = alumno.getNombre();
-        this.dni = alumno.getDni();
-        this.correo = alumno.getCorreo();
-        this.telefono = alumno.getTelefono();
-        this.fechaNacimiento = alumno.getFechaNacimiento();
-        this.nia = alumno.getNia();
+        setNombre(alumno.getNombre());
+        setDni(alumno.getDni());
+        setDni(alumno.getDni());
+        setCorreo(alumno.getCorreo());
+        setTelefono(alumno.getTelefono());
+        setFechaNacimiento(alumno.getFechaNacimiento());
+        setNia();
     }
 
     //Getters y Setters
@@ -63,9 +64,6 @@ public class Alumno {
         if (nombre == null) {
             throw new NullPointerException("ERROR: El nombre de un alumno no puede ser nulo.");
         }
-        if (nombre.isEmpty()) {
-            throw new IllegalArgumentException("ERROR: El nombre de un alumno no puede estar vacío.");
-        }
         if (nombre.isBlank()) {
             throw new IllegalArgumentException("ERROR: El nombre de un alumno no puede estar vacío.");
         }
@@ -80,7 +78,7 @@ public class Alumno {
         if (dni == null) {
             throw new NullPointerException("ERROR: El dni de un alumno no puede ser nulo.");
         }
-        if (dni.isBlank() || dni.isEmpty() || dni.length() != 9 || !dni.matches(ER_DNI)) {
+        if (dni.isBlank() || dni.length() != 9 || !dni.matches(ER_DNI)) {
             throw new IllegalArgumentException("ERROR: El dni del alumno no tiene un formato válido.");
         }
         if (!comprobarLetraDni(dni)) {
@@ -100,7 +98,7 @@ public class Alumno {
         if (!correo.matches(ER_CORREO)) {
             throw new IllegalArgumentException("ERROR: El correo del alumno no tiene un formato válido.");
         }
-        if (correo.isBlank() || correo.isEmpty()) {
+        if (correo.isBlank()) {
             throw new IllegalArgumentException("ERROR: El correo del alumno no puede estar vacío.");
         }
         this.correo = correo;
@@ -114,7 +112,7 @@ public class Alumno {
         if (telefono == null) {
             throw new NullPointerException("ERROR: El teléfono de un alumno no puede ser nulo.");
         }
-        if (!telefono.matches(ER_TELEFONO) || telefono.isBlank() || telefono.isEmpty()) {
+        if (!telefono.matches(ER_TELEFONO) || telefono.isBlank()) {
             throw new IllegalArgumentException("ERROR: El teléfono del alumno no tiene un formato válido.");
         }
         this.telefono = telefono;
@@ -148,9 +146,6 @@ public class Alumno {
         if (nombre.isBlank()) {
             throw new IllegalArgumentException("ERROR: No puede establecerse el NIA del alumnado ya que el nombre es vacío.");
         }
-        if (nombre.isEmpty()) {
-            throw new IllegalArgumentException("ERROR: No puede establecerse el NIA del alumnado ya que el nombre es vacío.");
-        }
         int numeroDni = dni.length();
         this.nia = nombre.toLowerCase().substring(0, 4) + dni.substring(5, 8);
     }
@@ -160,7 +155,7 @@ public class Alumno {
         if (nombre == null) {
             throw new NullPointerException("ERROR: No puede formatearse un nombre nulo.");
         }
-        if (nombre.isBlank() || nombre.isEmpty()) {
+        if (nombre.isBlank()) {
             throw new IllegalArgumentException("ERROR: No puede formatearse un nombre en blanco.");
         }
 
@@ -191,13 +186,13 @@ public class Alumno {
 
         int numeroDni = Integer.parseInt(dni.substring(0, 8));
         String letraDni = dni.substring(8);
-
+        String letraDniMayuscula = letraDni.toUpperCase();
         String[] letrasTabla = {"T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E"};
 
         int resultadodivision = numeroDni % 23;
         String dniValido = letrasTabla[resultadodivision];
 
-        return dniValido.equals(letraDni);
+        return dniValido.equals(letraDniMayuscula);
     }
 
     @Override
