@@ -1,15 +1,17 @@
 package org.iesalandalus.programacion.matriculacion.vista;
 
-import org.iesalandalus.programacion.matriculacion.dominio.*;
-import org.iesalandalus.programacion.matriculacion.negocio.*;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.Alumnos;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.Asignaturas;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.CiclosFormativos;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.Matriculas;
 import org.iesalandalus.programacion.utilidades.Entrada;
-import org.iesalandalus.programacion.matriculacion.dominio.Grado;
-import org.iesalandalus.programacion.matriculacion.dominio.Matricula;
-import org.iesalandalus.programacion.matriculacion.dominio.EspecialidadProfesorado;
 
+import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
 public class Consola {
     public static final CiclosFormativos ciclosFormativos = new CiclosFormativos(5);
@@ -27,8 +29,7 @@ public class Consola {
         System.out.print("\n");
         for (Opcion opcion : Opcion.values()) {
             System.out.println(opcion.ordinal() + ". " + opcion.getCadenaAMostrar());
-        }
-    }
+        }    }
 
     public static Opcion elegirOpcion() {
         System.out.println("Elige una opción: ");
@@ -65,6 +66,7 @@ public class Consola {
 
     public static LocalDate leerFecha(String mensaje) {
         LocalDate fechaNacimiento = null;
+
         do {
             System.out.print(mensaje);
             try {
@@ -79,7 +81,7 @@ public class Consola {
     public static Grado leerGrado() {
         System.out.println("Introduce el grado: ");
         for (Grado grado : Grado.values()) {
-            System.out.println(grado.ordinal() + 1 + ".-" + grado.imprimir());
+            System.out.println(grado.imprimir());
         }
         System.out.println("Selecciona un grado: ");
         int opcion = Entrada.entero();
@@ -91,13 +93,13 @@ public class Consola {
 
     public static CicloFormativo leerCicloFormativo() {
         System.out.println("Introduce los datos del ciclo formativo: ");
-        System.out.print("Código: ");
+        System.out.println("Código: ");
         int codigo = Entrada.entero();
-        System.out.print("Familia profesional: ");
+        System.out.println("Familia profesional: ");
         String familiaProfesional = Entrada.cadena();
-        System.out.print("Grado: ");
+        System.out.println("Grado: ");
         Grado grado = leerGrado();
-        System.out.print("Nombre: ");
+        System.out.println("Nombre: ");
         String nombre = Entrada.cadena();
         System.out.print("Horas: ");
         int horas = Entrada.entero();
@@ -122,9 +124,9 @@ public class Consola {
     }
 
     public static Curso leerCurso() {
-        System.out.print("Introduce el curso: ");
+        System.out.println("Introduce el curso: ");
         for (Curso curso : Curso.values()) {
-            System.out.println(curso.ordinal() + 1 + ".-" + curso.imprimir());
+            System.out.println(curso.imprimir());
         }
         if (Curso.values()[Entrada.entero()] == null) {
             do {
@@ -135,9 +137,9 @@ public class Consola {
     }
 
     public static EspecialidadProfesorado leerEspecialidadProfesorado() {
-        System.out.print("Introduce la especialidad: ");
+        System.out.println("Introduce la especialidad: ");
         for (EspecialidadProfesorado especialidadProfesorado : EspecialidadProfesorado.values()) {
-            System.out.println(especialidadProfesorado.ordinal() + 1 + ".-" + especialidadProfesorado.imprimir());
+            System.out.println(especialidadProfesorado.imprimir());
         }
         if (EspecialidadProfesorado.values()[Entrada.entero()] == null) {
             do {
@@ -159,13 +161,13 @@ public class Consola {
         int horasDesdoble = Entrada.entero();
         System.out.print("Curso: ");
         Curso curso = leerCurso();
-        System.out.print("Especialidad: ");
+        System.out.println("Especialidad: ");
         EspecialidadProfesorado especialidadProfesorado = leerEspecialidadProfesorado();
         return new Asignatura(codigo, nombre, horasAnuales, curso, horasDesdoble, especialidadProfesorado, getCicloFormativoPorCodigo());
     }
 
     public static Asignatura getAsignaturaPorCodigo() {
-        System.out.print("Introduce el codigo de la asignatura: ");
+        System.out.println("Introduce el codigo de la asignatura: ");
         String codigo = Entrada.cadena();
         return new Asignatura(codigo, "", 0, Curso.values()[0], 0, EspecialidadProfesorado.values()[0], getCicloFormativoPorCodigo());
     }
@@ -177,7 +179,7 @@ public class Consola {
             if (asignatura == null) {
                 System.out.println("No hay asignaturas registradas.");
             }
-            System.out.println(asignatura);
+            System.out.println(Arrays.toString(asignatura)); //todo IDE
         }
     }
 
@@ -187,7 +189,7 @@ public class Consola {
         return asignatura != null;
     }
 
-    public static Matricula leerMatricula(Alumnos alumnos, Asignaturas asignaturas) {
+    public static Matricula leerMatricula(Alumnos alumnos, Asignaturas asignaturas) throws OperationNotSupportedException {
         int idMatricula;
         String cursoAcademico;
         LocalDate fechaMatriculacion;
@@ -197,9 +199,9 @@ public class Consola {
             System.out.println("Introduce los datos de la matricula: ");
             System.out.print("ID: ");
             idMatricula = Entrada.entero();
-            System.out.print("Curso académico: ");
+            System.out.println("Curso académico: ");
             cursoAcademico = Entrada.cadena();
-            System.out.print("Fecha matriculación: ");
+            System.out.println("Fecha matriculación: ");
             fechaMatriculacion = LocalDate.parse(Entrada.cadena(), DateTimeFormatter.ofPattern(Matricula.FORMATO_FECHA));
             alumno = getAlumnoPorDni();
             alumno = alumnos.buscar(alumno);
@@ -212,8 +214,8 @@ public class Consola {
         return new Matricula(idMatricula, cursoAcademico, fechaMatriculacion, alumno, coleccionAsignaturas);
     }
 
-    public static Matricula getMatriculaPorIdentificador() {
-        Matricula matricula = null;
+    public static Matricula getMatriculaPorIdentificador() throws OperationNotSupportedException {
+        Matricula matricula;
         int idMatricula = 1234;
         String cursoAcademico = "21/22";
         LocalDate fechaMatriculacion = LocalDate.of(2022, 1, 1);
