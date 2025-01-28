@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CursoTest {
-/*
+
     private static final String NOMBRE_NO_VALIDO = "El nombre del curso no es válido.";
 
 
@@ -16,5 +16,5 @@ public class CursoTest {
         assertEquals("SEGUNDO", Curso.SEGUNDO.name(), NOMBRE_NO_VALIDO);
 
     }
-*/
+
 }

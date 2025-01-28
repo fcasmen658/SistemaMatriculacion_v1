@@ -81,7 +81,7 @@ public class Controlador {
         this.modelo.borrar(cicloFormativo);
     }
 
-    public CicloFormativo[] getCiclosFormativos() {
+    public CicloFormativo[] getCiclosFormativos() throws OperationNotSupportedException {
         return this.modelo.getCiclosFormativos();
     }
 
@@ -89,7 +89,7 @@ public class Controlador {
         this.modelo.insertar(matricula);
     }
 
-    public Matricula buscar(Matricula matricula) {
+    public Matricula buscar(Matricula matricula) throws OperationNotSupportedException {
         return this.modelo.buscar(matricula);
     }
 

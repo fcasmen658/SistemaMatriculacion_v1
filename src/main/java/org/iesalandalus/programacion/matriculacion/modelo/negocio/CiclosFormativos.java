@@ -5,16 +5,15 @@ import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo
 import javax.naming.OperationNotSupportedException;
 
 public class CiclosFormativos {
-    private final CicloFormativo[] coleccionCiclosFormativos;
     private int tamano = 0;
-    private int capacidad = 10;
+    private int capacidad;
+    private CicloFormativo[] coleccionCiclosFormativos;
 
     public CiclosFormativos(int capacidad) {
         if (capacidad <= 0) {
             throw new IllegalArgumentException("ERROR: La capacidad debe ser mayor que cero.");
         }
         this.capacidad = capacidad;
-        this.tamano = 0;
         this.coleccionCiclosFormativos = new CicloFormativo[capacidad];
     }
 
@@ -30,99 +29,91 @@ public class CiclosFormativos {
         return copiaCiclosFormativos;
     }
 
-    public int getTamano() {
-        return tamano;
-    }
-
-    public int getCapacidad() {
-        return capacidad;
-    }
-
-    public void insertar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
-        if (cicloFormativo == null) {
-            throw new NullPointerException("ERROR: El ciclo formativo no puede ser nulo.");
-        }
-        if (tamanoSuperado(getTamano())) {
-            throw new OperationNotSupportedException("ERROR: La colección de ciclos formativos ha alcanzado su capacidad.");
-        }
-
-        for (int i = 0; i < tamano; i++) {
-            if (coleccionCiclosFormativos[i].equals(cicloFormativo)) {
-                throw new OperationNotSupportedException("ERROR: El ciclo formativo ya existe en la colección.");
-            }
-        }
-        coleccionCiclosFormativos[tamano] = new CicloFormativo(cicloFormativo);
-        tamano++;
-    }
-
     private int buscarIndice(CicloFormativo cicloFormativo) {
         if (cicloFormativo == null) {
-            throw new NullPointerException("ERROR: El ciclo formativo no puede ser nulo.");
+            throw new IllegalArgumentException("ERROR: No se puede buscar un Ciclo Formativo nulo.");
         }
-        int indice = -1;
-        for (int i = 0; !tamanoSuperado(i) && indice == -1; i++) {
-            if (coleccionCiclosFormativos[i].equals(cicloFormativo)) {
-                indice = i;
+
+        int indice = 0;
+        boolean cicloFormativoEncontrado = false;
+        while (!tamanoSuperado(indice) && !cicloFormativoEncontrado) {
+            if (get()[indice].equals(cicloFormativo)) {
+                cicloFormativoEncontrado = true;
+            } else {
+                indice++;
             }
         }
         return indice;
     }
 
-    private boolean tamanoSuperado(int i) {
-        if (i < 0) {
-            throw new IllegalArgumentException("ERROR: El índice debe ser mayor o igual que cero.");
+    public void insertar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+        if (cicloFormativo == null) {
+            throw new NullPointerException("ERROR: No se puede insertar un ciclo formativo nulo.");
         }
-        if (i >= getTamano()) {
-            throw new IllegalArgumentException("ERROR: El índice debe ser menor o igual que la capacidad.");
+        int indice = buscarIndice(cicloFormativo);
+        if (capacidadSuperada(indice)) {
+            throw new OperationNotSupportedException("ERROR: No se aceptan más ciclos formativos.");
         }
-        return i == getTamano();
+        if (tamanoSuperado(indice)) {
+            coleccionCiclosFormativos[indice] = new CicloFormativo(cicloFormativo);
+            tamano++;
+        } else {
+            throw new OperationNotSupportedException("ERROR: Ya existe un ciclo formativo con ese código.");
+        }
+
     }
 
-    private boolean capacidadSuperada(int i) {
-        if (i < 0) {
-            throw new IllegalArgumentException("ERROR: El índice debe ser mayor o igual que cero.");
-        }
-        if (i >= getCapacidad()) {
-            throw new IllegalArgumentException("ERROR: El índice debe ser menor o igual que la capacidad.");
-        }
-        return i == getCapacidad();
+    private boolean tamanoSuperado(int indice) {
+        return indice >= getTamano();
+    }
+
+    private boolean capacidadSuperada(int indice) {
+        return indice >= getCapacidad();
     }
 
     public CicloFormativo buscar(CicloFormativo cicloFormativo) {
         if (cicloFormativo == null) {
             throw new NullPointerException("ERROR: El ciclo formativo no puede ser nulo.");
         }
+
         int indice = buscarIndice(cicloFormativo);
-        if (indice == -1) {
-            throw new IllegalArgumentException("ERROR: El ciclo formativo no existe.");
+        if (tamanoSuperado(indice)) {
+            return null;
+        } else {
+            return new CicloFormativo(coleccionCiclosFormativos[indice]);
         }
-        return coleccionCiclosFormativos[indice];
     }
 
     public void borrar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
         if (cicloFormativo == null) {
-            throw new NullPointerException("ERROR: El ciclo formativo no puede ser nulo.");
+            throw new NullPointerException("ERROR: No se puede borrar un ciclo formativo nulo.");
         }
+
         int indice = buscarIndice(cicloFormativo);
-        if (indice == -1) {
-            throw new OperationNotSupportedException("ERROR: El ciclo formativo no existe.");
+
+        if (tamanoSuperado(indice)) {
+            throw new OperationNotSupportedException("ERROR: No existe ningún ciclo formativo como el indicado.");
+        } else {
+            desplazarUnaPosicionHaciaIzquierda(indice);
         }
+    }
+
+    private void desplazarUnaPosicionHaciaIzquierda(int indice) {
+        coleccionCiclosFormativos[indice] = null;
         for (int i = indice; !tamanoSuperado(i); i++) {
-            coleccionCiclosFormativos[i] = coleccionCiclosFormativos[i + 1];
+            if (i < getCapacidad() - 1) {
+                coleccionCiclosFormativos[i] = coleccionCiclosFormativos[i + 1];
+            }
         }
-        desplazarUnaPosicionHaciaIzquierda(indice);
         tamano--;
     }
 
-    private void desplazarUnaPosicionHaciaIzquierda(int i) throws OperationNotSupportedException {
-        if (tamanoSuperado(i)) {
-            throw new OperationNotSupportedException("ERROR: No se puede desplazar una posición hacia la izquierda.");
-        } else {
-            for (int j = i; !tamanoSuperado(j); j++) {
-                coleccionCiclosFormativos[j] = coleccionCiclosFormativos[j + 1];
-            }
-            tamano--;
-        }
+    public int getTamano() {
+        return tamano;
+    }
+
+    public int getCapacidad() {
+        return capacidad;
     }
 
 }

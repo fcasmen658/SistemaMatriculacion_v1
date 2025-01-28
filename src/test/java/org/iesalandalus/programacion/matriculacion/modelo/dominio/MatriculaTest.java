@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MatriculaTest {
-/*
+
     private static final String ERROR_EXCEPCION = "Debería haber saltado la excepción.";
     private static final String ERROR_NO_EXCEPCION = "No debería haber saltado la excepción.";
     private static final String ALUMNO_NO_ESPERADO = "El alumno devuelto no es el que debería ser.";
@@ -25,7 +25,7 @@ public class MatriculaTest {
     private static final String ERROR_CURSO_ACADEMICO_NULO="ERROR: El curso académico de una matrícula no puede ser nulo.";
     private static final String ERROR_CURSO_ACADEMICO_INCORRECTO="ERROR: El curso académico de una matrícula no puede estar vacío.";
     private static final String ERROR_CURSO_ACADEMICO_FORMATO_INVALIDO="ERROR: El formato del curso académico no es correcto.";
-    private static final String ERROR_FECHA_MATRICULACION_NULA="ERROR: La fecha de matriculación de una mátricula no puede ser nula.";
+    private static final String ERROR_FECHA_MATRICULACION_NULA="ERROR: La fecha de matriculación de una matrícula no puede ser nula.";
     private static final String ERROR_FECHA_MATRICULACION_INCORRECTA="ERROR: La fecha de matriculación no puede ser posterior a hoy.";
     private static final String ERROR_FECHA_MATRICULACION_INCORRECTA_SUPERA_DIAS_PREVIOS="ERROR: La fecha de matriculación no puede ser anterior a " + Matricula.MAXIMO_DIAS_ANTERIOR_MATRICULA + " días.";
     private static final String ERROR_MATRICULA_SUPERA_LIMITE_HORAS="ERROR: No se puede realizar la matrícula ya que supera el máximo de horas permitidas (" + Matricula.MAXIMO_NUMERO_HORAS_MATRICULA + " horas).";
@@ -441,5 +441,5 @@ public class MatriculaTest {
 
 
     }
-*/
+
 }

@@ -29,8 +29,7 @@ public class Consola {
         System.out.print("\n");
         for (Opcion opcion : Opcion.values()) {
             System.out.println(opcion.ordinal() + ". " + opcion.getCadenaAMostrar());
-        }
-    }
+        }    }
 
     public static Opcion elegirOpcion() {
         System.out.println("Elige una opción: ");
@@ -67,6 +66,7 @@ public class Consola {
 
     public static LocalDate leerFecha(String mensaje) {
         LocalDate fechaNacimiento = null;
+
         do {
             System.out.print(mensaje);
             try {

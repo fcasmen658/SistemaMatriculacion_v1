@@ -47,7 +47,7 @@ public class Asignatura {
         if (codigo == null) {
             throw new NullPointerException("ERROR: El código de una asignatura no puede ser nulo.");
         }
-        if (codigo.isBlank() || codigo.isEmpty()) {
+        if (codigo.isBlank()) {
             throw new IllegalArgumentException("ERROR: El código de una asignatura no puede estar vacío.");
         }
         if (!codigo.matches(ER_CODIGO)) {
@@ -63,9 +63,6 @@ public class Asignatura {
     public void setNombre(String nombre) {
         if (nombre == null) {
             throw new NullPointerException("ERROR: El nombre de una asignatura no puede ser nulo.");
-        }
-        if (nombre.isBlank() || nombre.isEmpty()) {
-            throw new IllegalArgumentException("ERROR: El nombre de una asignatura no puede estar vacío.");
         }
         this.nombre = nombre;
     }

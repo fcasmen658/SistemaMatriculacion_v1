@@ -21,19 +21,8 @@ public class Alumnos {
         return copiaProfundaAlumnos();
     }
 
-    private boolean tamanoSuperado(int i) throws IllegalArgumentException {
-        if (i < 0) {
-            throw new IllegalArgumentException("ERROR: El índice debe ser mayor o igual que cero.");
-        }
-        if (i >= getCapacidad()) {
-            throw new IllegalArgumentException("ERROR: El índice debe ser menor o igual que la capacidad.");
-        }
-        return i >= getTamano();
-    }
-
     private Alumno[] copiaProfundaAlumnos() {
         Alumno[] copiaAlumnos = new Alumno[capacidad];
-
         for (int i = 0; !tamanoSuperado(i); i++) {
             copiaAlumnos[i] = new Alumno(coleccionAlumnos[i]);
         }
@@ -54,7 +43,6 @@ public class Alumnos {
             }
         }
         return indice;
-
     }
 
     public void insertar(Alumno alumno) throws OperationNotSupportedException {
@@ -75,15 +63,12 @@ public class Alumnos {
         }
     }
 
+    private boolean tamanoSuperado(int indice) throws IllegalArgumentException {
+        return indice >= getTamano();
+    }
 
-    private boolean capacidadSuperada(int i) throws IllegalArgumentException {
-        if (i < 0) {
-            throw new IllegalArgumentException("ERROR: El índice debe ser mayor o igual que cero.");
-        }
-        if (i >= getCapacidad()) {
-            throw new IllegalArgumentException("ERROR: El índice debe ser menor o igual que la capacidad.");
-        }
-        return i >= getCapacidad();
+    private boolean capacidadSuperada(int indice) throws IllegalArgumentException {
+        return indice >= getCapacidad();
     }
 
     public Alumno buscar(Alumno alumno) {
@@ -97,32 +82,46 @@ public class Alumnos {
         return new Alumno(get()[indice]);
     }
 
+    /*public void borrar(Alumno alumno) throws OperationNotSupportedException {
+        // Verifica que el alumno no sea nulo
+        if (alumno == null) {
+            throw new NullPointerException("ERROR: No se puede borrar un alumno nulo.");
+        }
+
+        // Busca y borra el alumno si existe
+        int indice = buscarIndice(alumno);
+        if (indice != -1) {
+            // Desplaza los alumnos hacia la izquierda para rellenar el hueco
+            for (int i = indice; !tamanoSuperado(i); i++) {
+                coleccionAlumnos[i] = coleccionAlumnos[i + 1];
+            }
+            desplazarUnaPosicionHaciaIzquierda(indice);
+            tamano--;
+        } else {
+            throw new OperationNotSupportedException("ERROR: El alumno no se encuentra en la colección de alumnos.");
+        }
+    }*/
 
     public void borrar(Alumno alumno) throws OperationNotSupportedException {
         if (alumno == null) {
-            throw new NullPointerException("ERROR: El alumno no puede ser nulo.");
+            throw new NullPointerException("ERROR: No se puede borrar un alumno nulo.");
         }
-        int i = buscarIndice(alumno);
-        if (tamanoSuperado(i)) {
+        int indice = buscarIndice(alumno);
+        if (tamanoSuperado(indice)) {
             throw new OperationNotSupportedException("ERROR: No existe ningún alumno como el indicado.");
-        } else if (buscarIndice(alumno) == -1) {
-            throw new OperationNotSupportedException("ERROR: El alumno no se encuentra en la colección de alumnos.");
         } else {
-            int indice = buscarIndice(alumno);
-            for (i = indice; !tamanoSuperado(i); i++) {
+            desplazarUnaPosicionHaciaIzquierda(indice);
+        }
+    }
+
+    private void desplazarUnaPosicionHaciaIzquierda(int indice) {
+        coleccionAlumnos[indice] = null;
+        for (int i = indice; !tamanoSuperado(i); i++) {
+            if (i < getCapacidad() - 1) {
                 coleccionAlumnos[i] = coleccionAlumnos[i + 1];
             }
         }
-            desplazarUnaPosicionHaciaIzquierda(i);
         tamano--;
-    }
-
-    private void desplazarUnaPosicionHaciaIzquierda(int i) throws OperationNotSupportedException {
-        if (!tamanoSuperado(i))
-            throw new OperationNotSupportedException("ERROR: El alumno no se encuentra en la colección de alumnos.(96)");
-        for (int j = i; !tamanoSuperado(j); j++) {
-            coleccionAlumnos[j] = coleccionAlumnos[j + 1];
-        }
     }
 
     public int getTamano() {

@@ -8,7 +8,6 @@ import org.iesalandalus.programacion.matriculacion.modelo.negocio.Alumnos;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.Asignaturas;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.CiclosFormativos;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.Matriculas;
-//import org.iesalandalus.programacion.matriculacion.vista.Consola;
 
 import javax.naming.OperationNotSupportedException;
 
@@ -76,7 +75,7 @@ public class Modelo {
         this.ciclosFormativos.borrar(cicloFormativo);
     }
 
-    public CicloFormativo[] getCiclosFormativos() {
+    public CicloFormativo[] getCiclosFormativos() throws OperationNotSupportedException {
         return this.ciclosFormativos.get();
     }
 
@@ -84,7 +83,7 @@ public class Modelo {
         this.matriculas.insertar(matricula);
     }
 
-    public Matricula buscar(Matricula matricula) {
+    public Matricula buscar(Matricula matricula) throws OperationNotSupportedException {
         return this.matriculas.buscar(matricula);
     }
 

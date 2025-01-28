@@ -53,9 +53,6 @@ public class CicloFormativo {
         if (familiaProfesional.isBlank()) {
             throw new IllegalArgumentException("ERROR: La familia profesional no puede estar vacía.");
         }
-        if (familiaProfesional.isEmpty()) {
-            throw new IllegalArgumentException("ERROR: La familia profesional de un ciclo formativo no puede estar en blanco.");
-        }
         this.familiaProfesional = familiaProfesional;
     }
 
@@ -80,9 +77,6 @@ public class CicloFormativo {
         }
         if (nombre.isBlank()) {
             throw new IllegalArgumentException("ERROR: El nombre de un ciclo formativo no puede estar vacío.");
-        }
-        if (nombre.isEmpty()) {
-            throw new IllegalArgumentException("ERROR: El nombre de un ciclo formativo no puede estar en blanco.");
         }
         this.nombre = nombre;
     }
